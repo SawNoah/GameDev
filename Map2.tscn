@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://models/Models/gltf/Green.material" type="Material" id=1]
+[ext_resource path="res://3DGodotRobot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Maps/Blocks/tile_Large_forest.tres" type="MeshLibrary" id=3]
+[ext_resource path="res://Character1.tscn" type="PackedScene" id=4]
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 10, 0.25, 10 )
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 20, 0.5, 20 )
+
+[sub_resource type="ProceduralSky" id=4]
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 4 )
+
+[node name="Map2" type="Spatial"]
+
+[node name="Ground" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="3DGodotRobot" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 2.13215, 0 )
+
+[node name="CameraTarget" type="Spatial" parent="3DGodotRobot"]
+transform = Transform( -1, -5.26026e-08, 7.22951e-08, 0, 0.808606, 0.58835, -8.9407e-08, 0.58835, -0.808606, 8.04663e-07, 5, -9 )
+
+[node name="InterpolatedCamera" type="InterpolatedCamera" parent="3DGodotRobot"]
+transform = Transform( -1, -3.20989e-08, 8.34462e-08, 0, 0.93333, 0.35902, -8.9407e-08, 0.35902, -0.93333, 3.97086e-07, 1.12154, -4.44133 )
+environment = SubResource( 3 )
+target = NodePath("../CameraTarget")
+enabled = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="3DGodotRobot"]
+transform = Transform( 1, -7.2389e-09, 1.23189e-07, -8.22331e-08, -0.783412, 0.621503, 9.20084e-08, -0.621503, -0.783412, 6.81388e-07, 6.50608, -7.6212 )
+shadow_enabled = true
+directional_shadow_max_distance = 80.0
+
+[node name="Character1" parent="3DGodotRobot" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.132, 0 )
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 3 )
+cell_size = Vector3( 1, 1, 1 )
+data = {
+"cells": PoolIntArray( 196621, 0, 720897, 262133, 0, 1245185, 4, 1, 0, 10, 1, 0, 65528, 1, 0, 65534, 1, 0, 196601, 6, 1048576, 196621, 6, 720897, 262133, 6, 1245185, 4, 7, 0, 10, 7, 0, 65528, 7, 0, 65534, 7, 0, 65376, 65091, 0, 65540, 65524, 1441793, 65546, 65524, 1441793, 131064, 65524, 1441793, 131070, 65524, 1441793, 131076, 65524, 1441793, 196606, 65524, 1441793, 196609, 65524, 1441793, 4, 65525, 0, 10, 65525, 0, 65528, 65525, 0, 65534, 65525, 0, 196621, 65530, 720897, 262133, 65530, 1245185, 4, 65531, 0, 10, 65531, 0, 65528, 65531, 0, 65534, 65531, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 2, 0 )
+}
