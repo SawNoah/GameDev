@@ -23,28 +23,28 @@ func _physics_process(delta):
 		direction.z -= 1
 		Run_Jump()
 		Double_Jump()
-		Run_Attack()
+		Attack()
 		
 	if Input.is_action_pressed("back"):
 		$AnimationTree["parameters/playback"].travel("Run")
 		direction.z += 1
 		Run_Jump()
 		Double_Jump()
-		Run_Attack()
+		Attack()
 		
 	if Input.is_action_pressed("right"):
 		$AnimationTree["parameters/playback"].travel("Run")
 		direction.x += 1
 		Run_Jump()
 		Double_Jump()
-		Run_Attack()
+		Attack()
 		
 	if Input.is_action_pressed("left"):
 		$AnimationTree["parameters/playback"].travel("Run")
 		direction.x -= 1
 		Run_Jump()
 		Double_Jump()
-		Run_Attack()
+		Attack()
 
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
@@ -54,6 +54,7 @@ func _physics_process(delta):
 	else:
 		$AnimationTree["parameters/playback"].travel("Idle")
 		Stand_Jump()
+		Attack()
 		
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
@@ -69,11 +70,11 @@ func _physics_process(delta):
 		$Pivot/RobotArmature.translation.y = 0
 		$CollisionShape.scale.y = 1
 		$CollisionShape.translation.y = 0.8
-
-	velocity.y -= fall_accelaration * delta
-
 	
-	move_and_slide(velocity, Vector3.UP)
+	var gravity_resistence = get_floor_normal()	if is_on_floor() else Vector3.UP
+	velocity -= gravity_resistence * fall_accelaration * delta
+
+	velocity = move_and_slide(velocity, Vector3.UP)
 	
 func Stand_Jump():
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
@@ -106,7 +107,8 @@ func Double_Jump2():
 	elif is_on_floor():
 		 jump_count -= 1
 		
-func Run_Attack():
+func Attack():
 	if is_on_floor() and Input.is_action_just_pressed("attack"):
-		$AnimationTree["parameters/playback"].travel("Run_Attack")
+		$AnimationPlayer.play("Attack1")
+		#$AnimationTree["parameters/playback"].travel("Stand_Attack")
 

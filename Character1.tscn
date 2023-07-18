@@ -155,9 +155,8 @@ surfaces/0 = {
 "vertex_count": 9396
 }
 
-[sub_resource type="CylinderShape" id=45]
-height = 1.58118
-radius = 0.357162
+[sub_resource type="CapsuleShape" id=72]
+radius = 0.412985
 
 [sub_resource type="Skin" id=27]
 
@@ -241,7 +240,7 @@ states/Stand_Jump/node = SubResource( 47 )
 states/Stand_Jump/position = Vector2( 82, -25.1685 )
 transitions = [ "Idle", "Stand_Jump", SubResource( 48 ), "Stand_Jump", "Idle", SubResource( 49 ), "Idle", "Crouch", SubResource( 56 ), "Crouch", "Idle", SubResource( 57 ), "Idle", "Run", SubResource( 50 ), "Run", "Idle", SubResource( 51 ), "Run", "Jump", SubResource( 52 ), "Jump", "Run", SubResource( 53 ), "Run", "Crouch", SubResource( 58 ), "Crouch", "Run", SubResource( 59 ), "Run_Attack", "Run", SubResource( 68 ), "Run", "Run_Attack", SubResource( 69 ), "Stand_Attack", "Idle", SubResource( 70 ), "Idle", "Stand_Attack", SubResource( 71 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -433.455, 37.3858 )
+graph_offset = Vector2( -433.455, -73.8314 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=65]
 
@@ -3984,8 +3983,8 @@ mesh = SubResource( 5 )
 skin = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0.8, 0 )
-shape = SubResource( 45 )
+transform = Transform( 1, 0, 0, 0, -1.07285e-07, -1, 0, 1, -1.07285e-07, 0, 0.8, 0 )
+shape = SubResource( 72 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.892213, 0 )
