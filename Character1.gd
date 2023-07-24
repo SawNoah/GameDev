@@ -10,7 +10,6 @@ var jump_count = 0
 var max_jump = 2
 var velocity = Vector3.ZERO
 
-
 func _ready():
 	pass
 
@@ -49,7 +48,10 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.look_at(translation + direction, Vector3.UP)
-			
+		if is_on_floor() and $audio/walkTimer.time_left <= 0:
+			$audio/walkAudio.pitch_scale = rand_range(0.8, 1.2)
+			$audio/walkAudio.play()
+			$audio/walkTimer.start(0.25)
 		
 	else:
 		$AnimationTree["parameters/playback"].travel("Idle")
@@ -58,9 +60,7 @@ func _physics_process(delta):
 		
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
-	
-	
-		
+
 	if is_on_floor() and Input.is_action_pressed("crouch"):
 		$AnimationTree["parameters/playback"].travel("Crouch")
 		$Pivot/RobotArmature.translation.y = -0.35
@@ -110,5 +110,4 @@ func Double_Jump2():
 func Attack():
 	if is_on_floor() and Input.is_action_just_pressed("attack"):
 		$AnimationPlayer.play("Attack1")
-		#$AnimationTree["parameters/playback"].travel("Stand_Attack")
 

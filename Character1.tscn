@@ -1,8 +1,10 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Character1.gd" type="Script" id=1]
 [ext_resource path="res://Material_002.material" type="Material" id=2]
 [ext_resource path="res://Material.material" type="Material" id=3]
+[ext_resource path="res://audio/impacts/footstep_grass_001.ogg" type="AudioStream" id=4]
+[ext_resource path="res://audio/used_audio/attack.wav" type="AudioStream" id=5]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "3DGodotRobot_Cube005"
@@ -212,16 +214,14 @@ xfade_time = 0.3
 xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=68]
-xfade_time = 0.2
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=69]
-xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=70]
-xfade_time = 0.2
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=71]
-xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachine" id=28]
 states/Crouch/node = SubResource( 35 )
@@ -233,7 +233,7 @@ states/Jump/position = Vector2( 406, 231 )
 states/Run/node = SubResource( 31 )
 states/Run/position = Vector2( 222, 231 )
 states/Run_Attack/node = SubResource( 66 )
-states/Run_Attack/position = Vector2( -18.4546, 231 )
+states/Run_Attack/position = Vector2( -17.4546, 231 )
 states/Stand_Attack/node = SubResource( 67 )
 states/Stand_Attack/position = Vector2( -149.455, 111 )
 states/Stand_Jump/node = SubResource( 47 )
@@ -422,6 +422,23 @@ tracks/24/loop_wrap = true
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/keys = PoolRealArray( 0, 1, -3.23734e-10, -0.0455217, 0.00135784, 2.79397e-09, 2.84217e-14, -7.94093e-23, 1, 1, 1, 1, 0.0666667, 1, -3.23734e-10, -0.0455217, 0.00135784, -0.0101339, 2.08056e-14, -2.41612e-09, 0.999949, 1, 1, 1, 0.2, 1, -3.23734e-10, -0.0455217, 0.00135784, -0.0641579, -5.56258e-17, -1.52964e-08, 0.99794, 1, 1, 1, 0.266667, 1, -6.08674e-10, -0.0855885, 0.00255296, 0.0990257, 1.07108e-14, 2.36096e-08, 0.995085, 1, 1, 1, 0.333333, 1, -9.34319e-10, -0.131379, 0.00391882, 0.285976, 1.76109e-14, 6.8182e-08, 0.958237, 1, 1, 1, 0.466667, 1, -7.85065e-10, -0.110392, 0.0032928, 0.227867, 5.47306e-15, 5.43277e-08, 0.973692, 1, 1, 1, 0.533333, 1, -7.88457e-10, -0.110869, 0.00330703, 0.22492, 1.3673e-14, 5.36252e-08, 0.974377, 1, 1, 1, 0.666667, 1, -9.51279e-10, -0.133764, 0.00398996, 0.271617, 1.75346e-14, 6.47586e-08, 0.962405, 1, 1, 1, 0.733333, 1, -9.6824e-10, -0.136149, 0.0040611, 0.2722, 1.75376e-14, 6.48976e-08, 0.962241, 1, 1, 1, 1, 1, -6.06412e-10, -0.0852704, 0.00254348, 0.120385, 9.05869e-15, 2.8702e-08, 0.992727, 1, 1, 1, 1.20833, 1, -3.23734e-10, -0.0455217, 0.00135784, 2.79397e-09, 2.84217e-14, -7.94093e-23, 1, 1, 1, 1 )
+tracks/25/type = "method"
+tracks/25/path = NodePath("audio/attack")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+}, {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "Crouch"
@@ -4019,3 +4036,16 @@ anims/Sprint-loop = SubResource( 22 )
 anims/T-pose = SubResource( 23 )
 anims/WallJump = SubResource( 24 )
 anims/WallSlide = SubResource( 25 )
+
+[node name="audio" type="Spatial" parent="."]
+
+[node name="walkAudio" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 4 )
+volume_db = -5.0
+
+[node name="walkTimer" type="Timer" parent="audio"]
+one_shot = true
+
+[node name="attack" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 5 )
+volume_db = -3.0
