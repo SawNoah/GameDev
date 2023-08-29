@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Villager_hurt1.ogg-2cbf640cac66a2764e8b985173f770de.oggstr"
+
+[deps]
+
+source_file="res://audio/used_audio/Villager_hurt1.ogg"
+dest_files=[ "res://.import/Villager_hurt1.ogg-2cbf640cac66a2764e8b985173f770de.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

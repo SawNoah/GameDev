@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Creeper_hurt4.ogg-af293dd595396db4c8579e0a689802ba.oggstr"
+
+[deps]
+
+source_file="res://audio/used_audio/Creeper_hurt4.ogg"
+dest_files=[ "res://.import/Creeper_hurt4.ogg-af293dd595396db4c8579e0a689802ba.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

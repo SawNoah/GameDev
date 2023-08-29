@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Fox_bite3.ogg-134d360c1e1f1e1d054807874b281b24.oggstr"
+
+[deps]
+
+source_file="res://audio/used_audio/Fox_bite3.ogg"
+dest_files=[ "res://.import/Fox_bite3.ogg-134d360c1e1f1e1d054807874b281b24.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
