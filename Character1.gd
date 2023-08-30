@@ -9,9 +9,9 @@ var kick_air = 10.0
 var jump_count = 0
 var max_jump = 2
 var velocity = Vector3.ZERO
+onready var leftHand = $Pivot/RobotArmature/Skeleton/leftHand/hitbox
+onready var rightHand = $Pivot/RobotArmature/Skeleton/rightHand/hitbox
 
-func _ready():
-	pass
 
 func _physics_process(delta):
 	
@@ -19,28 +19,28 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("forward"):
 		$AnimationTree["parameters/playback"].travel("Run")
-		direction.z -= 1
+		direction.x -= 1
 		Run_Jump()
 		Double_Jump()
 		Attack()
 		
 	if Input.is_action_pressed("back"):
 		$AnimationTree["parameters/playback"].travel("Run")
-		direction.z += 1
+		direction.x += 1
 		Run_Jump()
 		Double_Jump()
 		Attack()
 		
 	if Input.is_action_pressed("right"):
 		$AnimationTree["parameters/playback"].travel("Run")
-		direction.x += 1
+		direction.z -= 1
 		Run_Jump()
 		Double_Jump()
 		Attack()
 		
 	if Input.is_action_pressed("left"):
 		$AnimationTree["parameters/playback"].travel("Run")
-		direction.x -= 1
+		direction.z += 1
 		Run_Jump()
 		Double_Jump()
 		Attack()
@@ -54,9 +54,10 @@ func _physics_process(delta):
 			$audio/walkTimer.start(0.25)
 		
 	else:
-		$AnimationTree["parameters/playback"].travel("Idle")
-		Stand_Jump()
-		Attack()
+		if is_on_floor():
+			$AnimationTree["parameters/playback"].travel("Idle")
+			Stand_Jump()
+			Attack()
 		
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
@@ -75,16 +76,18 @@ func _physics_process(delta):
 	velocity -= gravity_resistence * fall_accelaration * delta
 
 	velocity = move_and_slide(velocity, Vector3.UP)
-	
+
 func Stand_Jump():
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = jump_impulse 
+		velocity.y = jump_impulse
 		$AnimationTree["parameters/playback"].travel("Stand_Jump")
+
 func Run_Jump():
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = jump_impulse 
 		$AnimationTree["parameters/playback"].travel("Jump")
 		jump_count = 1
+
 func Double_Jump():
 	if !is_on_floor() and Input.is_action_just_pressed("jump") and jump_count < max_jump:
 		jump_count = 2
@@ -94,20 +97,20 @@ func Double_Jump():
 		$AnimationPlayer.play("Fall2")
 	if is_on_floor():
 		jump_count = 0
-			
-func Double_Jump2():
-	if jump_count <= max_jump and !is_on_floor():
-		
-		if Input.is_action_just_pressed("jump") and jump_count <= max_jump:
-			velocity.y = kick_air
-			velocity.x = speed
-			velocity.z = speed
-			$AnimationPlayer.play("Fall2")
-			jump_count +=1
-	elif is_on_floor():
-		 jump_count -= 1
-		
+
+
 func Attack():
 	if is_on_floor() and Input.is_action_just_pressed("attack"):
 		$AnimationPlayer.play("Attack1")
+	
+#Enermy gets hurt when gets attacked
+func _on_hitbox_body_entered(body):
+	if body.has_method("hurt"):
+		body.hurt()
+
+func _on_Health_dead():
+	speed == 0
+	$AnimationPlayer.play("Hurt")
+
+
 
