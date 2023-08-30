@@ -1,0 +1,176 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://fonts/Some Time Later.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://UI_scenes/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://Final Map/Level1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://audio/used_audio/button.ogg" type="AudioStream" id=4]
+[ext_resource path="res://audio/used_audio/game_enter_sound.wav" type="AudioStream" id=5]
+[ext_resource path="res://UI_scenes/Tutorial.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 125
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.490196 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.686275 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.392157 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MainMenu" type="Control"]
+script = ExtResource( 2 )
+mainGameScene = ExtResource( 3 )
+tutorialScene = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 969.0
+margin_bottom = 517.0
+rect_scale = Vector2( 1.05556, 1.15791 )
+color = Color( 0.192157, 0.192157, 0.317647, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 969.0
+margin_bottom = 604.0
+rect_scale = Vector2( 1.05656, 0.992619 )
+custom_constants/margin_right = 200
+custom_constants/margin_top = 50
+custom_constants/margin_left = 200
+custom_constants/margin_bottom = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 200.0
+margin_top = 50.0
+margin_right = 769.0
+margin_bottom = 529.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 569.0
+margin_bottom = 255.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+text = "Godot Adventure"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 259.0
+margin_right = 569.0
+margin_bottom = 479.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 569.0
+margin_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="NewGamebtn" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+margin_left = 50.0
+margin_right = 519.0
+margin_bottom = 60.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "New Game"
+
+[node name="NewGameTimer" type="Timer" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/NewGamebtn"]
+wait_time = 1.5
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 569.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Tutorialbtn" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2"]
+margin_left = 50.0
+margin_right = 519.0
+margin_bottom = 60.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Tutorial"
+
+[node name="TutorialTimer" type="Timer" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/Tutorialbtn"]
+wait_time = 1.5
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_top = 160.0
+margin_right = 569.0
+margin_bottom = 220.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 50
+custom_constants/margin_left = 50
+
+[node name="Exitbtn" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3"]
+margin_left = 50.0
+margin_right = 519.0
+margin_bottom = 60.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Exit Game"
+
+[node name="ExitTimer" type="Timer" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exitbtn"]
+wait_time = 0.5
+
+[node name="audio" type="Node" parent="."]
+
+[node name="btnHoverAudio" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="btnEnterAudio" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/NewGamebtn" to="." method="_on_NewGamebtn_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/NewGamebtn" to="." method="_on_NewGamebtn_mouse_entered"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/NewGamebtn/NewGameTimer" to="." method="_on_NewGameTimer_timeout"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/Tutorialbtn" to="." method="_on_Tutorialbtn_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/Tutorialbtn" to="." method="_on_Tutorialbtn_mouse_entered"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/Tutorialbtn/TutorialTimer" to="." method="_on_TutorialTimer_timeout"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exitbtn" to="." method="_on_Exitbtn_button_up"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exitbtn" to="." method="_on_Exitbtn_mouse_entered"]
+[connection signal="timeout" from="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Exitbtn/ExitTimer" to="." method="_on_ExitTimer_timeout"]

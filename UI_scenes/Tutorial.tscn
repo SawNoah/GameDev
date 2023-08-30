@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://fonts/Redkost Comic.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://sprites/Tutorial_Tips.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Some Time Later.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://audio/used_audio/button.ogg" type="AudioStream" id=4]
+[ext_resource path="res://audio/used_audio/game_enter_sound.wav" type="AudioStream" id=5]
+[ext_resource path="res://UI_scenes/Tutorial.gd" type="Script" id=6]
+[ext_resource path="res://Final Map/Level1.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 3 )
+
+[node name="Tutorial" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_right = 1.0
+script = ExtResource( 6 )
+tutorialScene = ExtResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.192157, 0.192157, 0.317647, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 16.0
+margin_right = 1024.0
+margin_bottom = 101.0
+custom_colors/font_color = Color( 0, 0.984314, 0.729412, 1 )
+custom_colors/font_outline_modulate = Color( 0.0823529, 0.905882, 0.152941, 1 )
+custom_colors/font_color_shadow = Color( 0.00784314, 0.0705882, 1, 1 )
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = -7
+custom_fonts/font = SubResource( 1 )
+text = "Tutorial Tips"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = 85.0
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="start_game" type="Button" parent="."]
+margin_left = 650.0
+margin_top = 494.0
+margin_right = 869.0
+margin_bottom = 584.0
+custom_colors/font_color_disabled = Color( 1, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0.0627451, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0.996078, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0.113725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.988235, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Start Game"
+flat = true
+icon_align = 1
+
+[node name="audio" type="Node" parent="."]
+
+[node name="btnHoverAudio" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="btnEnterAudio" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="button_up" from="start_game" to="." method="_on_start_game_button_up"]
+[connection signal="mouse_entered" from="start_game" to="." method="_on_start_game_mouse_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

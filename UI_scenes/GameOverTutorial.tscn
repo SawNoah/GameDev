@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://fonts/Redkost Comic.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/Some Time Later.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://audio/used_audio/game_enter_sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://UI_scenes/GameOverTurorial.gd" type="Script" id=4]
+[ext_resource path="res://audio/used_audio/button.ogg" type="AudioStream" id=5]
+[ext_resource path="res://UI_scenes/MainMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/used_audio/GameOver.mp3" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=3]
+size = 80
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 2 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+MainScene = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.192157, 0.192157, 0.317647, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 50.0
+margin_right = 1024.0
+margin_bottom = 246.0
+custom_colors/font_color = Color( 0, 0.984314, 0.729412, 1 )
+custom_colors/font_outline_modulate = Color( 0.0823529, 0.905882, 0.152941, 1 )
+custom_colors/font_color_shadow = Color( 0.00784314, 0.0705882, 1, 1 )
+custom_constants/shadow_offset_x = -7
+custom_constants/shadow_offset_y = -7
+custom_fonts/font = SubResource( 3 )
+text = "Game Over!!"
+align = 1
+valign = 1
+
+[node name="button-playagain" type="Button" parent="."]
+margin_left = 415.0
+margin_top = 288.0
+margin_right = 600.0
+margin_bottom = 378.0
+custom_colors/font_color_disabled = Color( 1, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0.0627451, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0.996078, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0.113725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.988235, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Play Again"
+flat = true
+icon_align = 1
+
+[node name="button-menu" type="Button" parent="."]
+margin_left = 415.0
+margin_top = 378.0
+margin_right = 600.0
+margin_bottom = 468.0
+custom_colors/font_color_disabled = Color( 1, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0.0627451, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0.996078, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0.113725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.988235, 1, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Main Menu"
+flat = true
+icon_align = 1
+
+[node name="audio" type="Spatial" parent="."]
+
+[node name="startAudio" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="btnHoverAudio" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="GameOver" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="ready" from="." to="." method="_on_Control_ready"]
+[connection signal="mouse_entered" from="button-playagain" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="button-playagain" to="." method="_on_buttonplayagain_pressed"]
+[connection signal="mouse_entered" from="button-menu" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="button-menu" to="." method="_on_buttonmenu_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
