@@ -1,7 +1,7 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Graveyard/test1.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/Health.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Health2.gd" type="Script" id=2]
 [ext_resource path="res://scripts/HealthBar.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Counter.gd" type="Script" id=4]
 [ext_resource path="res://Character1.tscn" type="PackedScene" id=5]
@@ -20,6 +20,7 @@
 [ext_resource path="res://asserts/enermy.tscn" type="PackedScene" id=18]
 [ext_resource path="res://asserts/beetle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://asserts/bee_bot.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Blocks/yellow_tiles.tres" type="MeshLibrary" id=21]
 
 [sub_resource type="ProceduralSky" id=84]
 sky_top_color = Color( 0.392157, 0.560784, 0.72549, 1 )
@@ -81,7 +82,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0
 environment = SubResource( 85 )
 
 [node name="Character1" parent="." instance=ExtResource( 5 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -309.956, 40.683, -99.7978 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.04401, 4.683, 90.2022 )
 
 [node name="CameraTarget" type="Spatial" parent="Character1"]
 transform = Transform( -1, -7.54979e-08, 1.30766e-07, 0, 0.866025, 0.5, -1.50996e-07, 0.5, -0.866025, -2.98023e-07, 6.25882, -6.96593 )
@@ -97,15 +98,26 @@ enabled = true
 transform = Transform( -1, 2.80393e-07, 1.29397e-07, -1.0677e-07, -0.707107, 0.707107, 2.89765e-07, 0.707107, 0.707107, 6.55651e-07, 5.75882, 5.16805 )
 shadow_enabled = true
 
-[node name="Flah" type="MeshInstance" parent="."]
+[node name="Flag" type="MeshInstance" parent="."]
 transform = Transform( -1.78814e-07, 0, 3, 0, 3, 0, -3, 0, -1.78814e-07, -332, 39, -99 )
 mesh = ExtResource( 17 )
 skeleton = NodePath("../Flag_Area")
 
-[node name="StaticBody" type="StaticBody" parent="Flah"]
+[node name="StaticBody" type="StaticBody" parent="Flag"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Flah/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Flag/StaticBody"]
 shape = SubResource( 93 )
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
+mesh_library = ExtResource( 21 )
+data = {
+"cells": PoolIntArray( 458709, 65443, 2, 524243, 65443, 2, 393174, 65444, 2, 589778, 65444, 2, 655315, 65445, 2 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 9, 0 )
+}
 
 [node name="Flag_Area" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -330, 41, -99 )
@@ -210,6 +222,12 @@ transform = Transform( 0, 8.74228e-08, -1, 0, -1, -8.74228e-08, -1, 0, 0, -181.8
 
 [node name="DoubleSwiper_Blue9" parent="swiper" instance=ExtResource( 7 )]
 transform = Transform( 0, 8.74228e-08, -1, 0, -1, -8.74228e-08, -1, 0, 0, -181.804, 12.7265, 25.0592 )
+
+[node name="DoubleSwiper_Blue10" parent="swiper" instance=ExtResource( 7 )]
+transform = Transform( 0, 8.74228e-08, -1, 0, -1, -8.74228e-08, -1, 0, 0, -259.804, 38.7265, -11.9408 )
+
+[node name="DoubleSwiper_Blue11" parent="swiper" instance=ExtResource( 7 )]
+transform = Transform( -1, -8.74228e-08, 4.37114e-08, -8.74228e-08, 1, 8.74228e-08, -4.37114e-08, 8.74228e-08, -1, -259.804, 37.0226, -17.9408 )
 
 [node name="DoubleSwiper_Blue4" parent="swiper" instance=ExtResource( 7 )]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -20.804, 3.7265, 88.0592 )
@@ -387,22 +405,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -164.828, 11.7957, 85.033 )
 [node name="coin" parent="coins/coinholder25" instance=ExtResource( 10 )]
 
 [node name="coinholder26" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -177.828, 11.7957, 87.033 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -180.828, 20.7957, 89.033 )
 
 [node name="coin" parent="coins/coinholder26" instance=ExtResource( 10 )]
 
 [node name="coinholder27" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -187.828, 11.7957, 87.033 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.828, 22.7957, 86.7772 )
 
 [node name="coin" parent="coins/coinholder27" instance=ExtResource( 10 )]
 
 [node name="coinholder28" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.828, 11.7957, 91.033 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.828, 18.7957, 91.033 )
 
 [node name="coin" parent="coins/coinholder28" instance=ExtResource( 10 )]
 
 [node name="coinholder29" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.828, 11.7957, 83.033 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -184.828, 14.7957, 85.033 )
 
 [node name="coin" parent="coins/coinholder29" instance=ExtResource( 10 )]
 
@@ -477,27 +495,27 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -260.828, 37.7957, 8.03295 )
 [node name="coin" parent="coins/coinholder43" instance=ExtResource( 10 )]
 
 [node name="coinholder44" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -262.828, 38.7957, -8.96705 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.828, 38.7957, -11.967 )
 
 [node name="coin" parent="coins/coinholder44" instance=ExtResource( 10 )]
 
 [node name="coinholder45" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -262.828, 38.7957, -17.967 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.828, 37.7957, -14.967 )
 
 [node name="coin" parent="coins/coinholder45" instance=ExtResource( 10 )]
 
 [node name="coinholder46" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -262.828, 38.7957, -28.967 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.828, 38.7957, -17.967 )
 
 [node name="coin" parent="coins/coinholder46" instance=ExtResource( 10 )]
 
 [node name="coinholder47" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -262.828, 38.7957, -40.967 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.828, 38.7957, -55.967 )
 
 [node name="coin" parent="coins/coinholder47" instance=ExtResource( 10 )]
 
 [node name="coinholder48" type="Spatial" parent="coins"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -262.828, 38.7957, -50.967 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.828, 38.7957, -59.967 )
 
 [node name="coin" parent="coins/coinholder48" instance=ExtResource( 10 )]
 
@@ -512,25 +530,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -272.828, 40.7957, -70.967 )
 [node name="coin" parent="coins/coinholder50" instance=ExtResource( 10 )]
 
 [node name="enermy" parent="." instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -291.13, 40.2758, -90.1795 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.13, 40.2758, -41.1795 )
 
 [node name="enermy2" parent="." instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -260.13, 38.2758, -17.1795 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -260.13, 38.2758, 6.8205 )
 
 [node name="enermy3" parent="." instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -247.13, 26.2758, 4.82046 )
 
 [node name="enermy4" parent="." instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.13, 11.2758, 90.8205 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -182.13, 11.2758, 12.8205 )
 
 [node name="enermy5" parent="." instance=ExtResource( 18 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -58.1301, 5.27579, 90.8205 )
 
 [node name="beetle" parent="." instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -291.641, 40.2978, -70.2792 )
-
-[node name="beetle2" parent="." instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.641, 38.2978, -23.2792 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -181.548, 11.6817, 87.3559 )
 
 [node name="beetle3" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -181.641, 12.2978, 55.7208 )
@@ -538,11 +553,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -181.641, 12.2978, 55.7208 )
 [node name="beetle4" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.641, 5.29778, 89.7208 )
 
-[node name="bee_bot" parent="." instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -259.696, 39.0338, -8.82851 )
-
 [node name="bee_bot2" parent="." instance=ExtResource( 20 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -191.696, 13.0338, 86.1715 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -178.696, 13.0338, 77.1715 )
 
 [connection signal="body_entered" from="Flag_Area" to="Flag_Area" method="_on_Flag_Area_body_entered"]
 [connection signal="timeout" from="Flag_Area/Timer" to="Flag_Area" method="_on_Timer_timeout"]
@@ -557,6 +569,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -191.696, 13.0338, 86.1715 )
 [connection signal="Hitbox_body_entered" from="swiper/DoubleSwiper_Blue8" to="Control/HealthBar" method="_on_trap_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="swiper/DoubleSwiper_Blue7" to="Control/HealthBar" method="_on_trap_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="swiper/DoubleSwiper_Blue9" to="Control/HealthBar" method="_on_trap_Hitbox_body_entered"]
+[connection signal="Hitbox_body_entered" from="swiper/DoubleSwiper_Blue10" to="Control/HealthBar" method="_on_trap_Hitbox_body_entered"]
+[connection signal="Hitbox_body_entered" from="swiper/DoubleSwiper_Blue11" to="Control/HealthBar" method="_on_trap_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="swiper/DoubleSwiper_Blue4" to="Control/HealthBar" method="_on_trap_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="swiper/DoubleSwiper_Blue2" to="Control/HealthBar" method="_on_trap_Hitbox_body_entered"]
 [connection signal="body_entered" from="coins/coinholder1/coin" to="coins/coinholder1/coin" method="_on_coin_body_entered"]
@@ -665,8 +679,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -191.696, 13.0338, 86.1715 )
 [connection signal="Hitbox_body_entered" from="enermy4" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="enermy5" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="beetle" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
-[connection signal="Hitbox_body_entered" from="beetle2" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="beetle3" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="beetle4" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
-[connection signal="Hitbox_body_entered" from="bee_bot" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
 [connection signal="Hitbox_body_entered" from="bee_bot2" to="Control/HealthBar" method="_on_enermy_Hitbox_body_entered"]
